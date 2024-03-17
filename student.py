@@ -306,45 +306,45 @@ class Student:
           scroll_x=ttk.Scrollbar(table_frame,orient=HORIZONTAL)
           scroll_y=ttk.Scrollbar(table_frame,orient=VERTICAL)
 
-          self.student_table=ttk.Treeview(table_frame,column=("dep","course","year","sem","id","name","div","roll","gender","dob","email","phone","address","teacher","photo"),xscrollcommand=scroll_x.set,yscrollcommand=scroll_y.set)
+          self.student_table=ttk.Treeview(table_frame,column=("Dep","Course","Year","Semester","Student id","Name","Division","Roll","Gender","DOB","Email","Phone","Address","Teacher","PhotoSample"),xscrollcommand=scroll_x.set,yscrollcommand=scroll_y.set)
 
           scroll_x.pack(side=BOTTOM,fill=X)
           scroll_y.pack(side=RIGHT,fill=Y)
           scroll_x.config(command=self.student_table.xview)
           scroll_y.config(command=self.student_table.yview)
 
-          self.student_table.heading("dep",text="Department")
-          self.student_table.heading("course",text="Course")
-          self.student_table.heading("year",text="Year")
-          self.student_table.heading("sem",text="Semester")
-          self.student_table.heading("id",text="StudentID")
-          self.student_table.heading("name",text="Name")
-          self.student_table.heading("div",text="Division")
-          self.student_table.heading("roll",text="Roll")
-          self.student_table.heading("gender",text="Gender")
-          self.student_table.heading("dob",text="DOB")
-          self.student_table.heading("email",text="Email")
-          self.student_table.heading("phone",text="phone")
-          self.student_table.heading("address",text="Address")
-          self.student_table.heading("teacher",text="Teacher")
-          self.student_table.heading("photo",text="SampleStatus")
+          self.student_table.heading("Dep",text="Department")
+          self.student_table.heading("Course",text="Course")
+          self.student_table.heading("Year",text="Year")
+          self.student_table.heading("Semester",text="Semester")
+          self.student_table.heading("Student id",text="StudentID")
+          self.student_table.heading("Name",text="Name")
+          self.student_table.heading("Division",text="Division")
+          self.student_table.heading("Roll",text="Roll")
+          self.student_table.heading("Gender",text="Gender")
+          self.student_table.heading("DOB",text="DOB")
+          self.student_table.heading("Email",text="Email")
+          self.student_table.heading("Phone",text="phone")
+          self.student_table.heading("Address",text="Address")
+          self.student_table.heading("Teacher",text="Teacher")
+          self.student_table.heading("PhotoSample",text="SampleStatus")
           self.student_table["show"]="headings"
 
-          self.student_table.column("dep",width=100)
-          self.student_table.column("course",width=100)
-          self.student_table.column("year",width=100)
-          self.student_table.column("sem",width=100)
-          self.student_table.column("id",width=100)
-          self.student_table.column("name",width=100)
-          self.student_table.column("roll",width=100)
-          self.student_table.column("gender",width=100)
-          self.student_table.column("div",width=100)
-          self.student_table.column("dob",width=100)
-          self.student_table.column("email",width=100)
-          self.student_table.column("phone",width=100)
-          self.student_table.column("address",width=100)
-          self.student_table.column("teacher",width=100)
-          self.student_table.column("photo",width=150)
+          self.student_table.column("Dep",width=100)
+          self.student_table.column("Course",width=100)
+          self.student_table.column("Year",width=100)
+          self.student_table.column("Semester",width=100)
+          self.student_table.column("Student id",width=100)
+          self.student_table.column("Name",width=100)
+          self.student_table.column("Division",width=100)
+          self.student_table.column("Roll",width=100)
+          self.student_table.column("Gender",width=100)
+          self.student_table.column("DOB",width=100)
+          self.student_table.column("Email",width=100)
+          self.student_table.column("Phone",width=100)
+          self.student_table.column("Address",width=100)
+          self.student_table.column("Teacher",width=100)
+          self.student_table.column("PhotoSample",width=150)
 
           self.student_table.pack(fill=BOTH,expand=1)
           self.student_table.bind("<ButtonRelease>",self.get_cursor)
@@ -354,44 +354,42 @@ class Student:
        # function decration
 
      def add_data(self):
-      if self.var_dep.get()=="select Department" or self.var_std_name.get()=="" or self.var_std_id.get()=="":
-          messagebox.showerror("Error","All fields are required",parent=self.root)
-      else:
-          try:
-               conn=mysql.connector.connect(host="localhost",username="root",password="Anshu@999",database="face_recogniger_system")
-               my_cursor=conn.cursor()
-               my_cursor.execute("Insert into student values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",(
-               
-                                                                                     self.var_dep.get(),
-                                                                                     self.var_course.get(),
-                                                                                     self.var_year.get(),
-                                                                                     self.var_semester.get(),
-                                                                                     self.var_std_id.get(),
-                                                                                     self.var_std_name.get(),
-                                                                                     self.var_div.get(),
-                                                                                     self.var_roll.get(),
-                                                                                     self.var_gender.get(),
-                                                                                     self.var_dob.get(),
-                                                                                     self.var_email.get(),
-                                                                                     self.var_phone.get(),
-                                                                                     self.var_address.get(),
-                                                                                     self.var_teacher.get(),
-                                                                                     self.var_radio1.get()
-
-
-                                                                            ))
-               conn.commit()
-               self.fetch_data()
-               conn.close()
-               messagebox.showinfo("Sucess","Student details has been added successfully",parent=self.root)
-          except Exception as es:
-              messagebox.showerror("Error",f"Sue to :{str(es)}",parent=self.root)
+        if self.var_dep.get() == "select Department" or self.var_std_name.get() == "" or self.var_std_id.get() == "":
+         messagebox.showerror("Error", "All fields are required", parent=self.root)
+        else:
+         try:
+            conn = mysql.connector.connect(host="localhost", username="root", password="Anshu@999", database="face_recogniger")
+            my_cursor = conn.cursor()
+            sql = "Insert into student (Dep, Course, Year, Semester, Student_id, Name, Division, Roll, Gender, DOB, Email, Phone, Address, Teacher, PhotoSample) values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+            my_cursor.execute(sql, (
+                self.var_dep.get(),
+                self.var_course.get(),
+                self.var_year.get(),
+                self.var_semester.get(),
+                self.var_std_id.get(),
+                self.var_std_name.get(),
+                self.var_div.get(),
+                self.var_roll.get(),
+                self.var_gender.get(),
+                self.var_dob.get(),
+                self.var_email.get(),
+                self.var_phone.get(),
+                self.var_address.get(),
+                self.var_teacher.get(),
+                self.var_radio1.get()
+            ))
+            conn.commit()
+            self.fetch_data()
+            conn.close()
+            messagebox.showinfo("Success", "Student details has been added successfully", parent=self.root)
+         except Exception as es:
+            messagebox.showerror("Error", f"Due to :{str(es)}", parent=self.root)
 
 
        # fetch data
 
      def fetch_data(self): 
-          conn=mysql.connector.connect(host="localhost",username="root",password="Anshu@999",database="face_recogniger_system")
+          conn=mysql.connector.connect(host="localhost",username="root",password="Anshu@999",database="face_recogniger")
           my_cursor=conn.cursor()
           my_cursor.execute("select * from student")
           data=my_cursor.fetchall()
@@ -440,14 +438,15 @@ class Student:
           try:
                Update=messagebox.askyesno("Update","Do you want to update this student details",parent=self.root)
                if Update>0:
-                    conn=mysql.connector.connect(host="localhost",username="root",password="Anshu@999",database="face_recogniger_system")
+                    conn=mysql.connector.connect(host="localhost",username="root",password="Anshu@999",database="face_recogniger")
                     my_cursor=conn.cursor()
-                    my_cursor.execute("update student set %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s",(
+                    my_cursor.execute("update student set Dep=%s,course=%s,Year=%s,Semester=%s,Name=%s,Division=%s,Roll=%s,Gender=%s,DOB=%s,Email=%s,Phone=%s,Address=%s,Teacher=%s,PhotoSample=%s where Student_id=%s",(
                         
                                                                                                                                                                                self.var_dep.get(),
                                                                                                                                                                                self.var_course.get(),
                                                                                                                                                                                self.var_year.get(),
                                                                                                                                                                                self.var_semester.get(),
+                                                                                                                                                                               self.var_std_id.get(),
                                                                                                                                                                                self.var_std_name.get(),
                                                                                                                                                                                self.var_div.get(),
                                                                                                                                                                                self.var_roll.get(),
@@ -457,8 +456,8 @@ class Student:
                                                                                                                                                                                self.var_phone.get(),
                                                                                                                                                                                self.var_address.get(),
                                                                                                                                                                                self.var_teacher.get(),
-                                                                                                                                                                               self.var_radio1.get(),
-                                                                                                                                                                               self.var_std_id.get()
+                                                                                                                                                                               self.var_radio1.get()
+                                                                                                                                                                               
                                                                                                                                                                           ))     
                else:
                  if not Update:
@@ -477,9 +476,9 @@ class Student:
              messagebox.showerror("Error","Student id must be required",parent=self.root)
           else:
                try:
-                 delete=messagebox.askyesno("Student Delete page","Do you want to delete this student",parent=self.root)
+                 delete=messagebox.askyesno("Student Delete page","Do you want to delete this student  ",parent=self.root)
                  if delete>0:
-                    conn=mysql.connector.connect(host="localhost",username="root",password="Anshu@999",database="face_recogniger_system")
+                    conn=mysql.connector.connect(host="localhost",username="root",password="Anshu@999",database="face_recogniger")
                     my_cursor=conn.cursor()
                     sql="delete from student where Student_id=%s"
                     val=(self.var_std_id.get(),)
@@ -500,12 +499,14 @@ class Student:
      # reset
 
      def reset_data(self):
-         self.var_dep.set("select department")
-         self.var_course.set("select Course")
-         self.var_year.set("select Year")
-         self.var_semester.set("select semester")
+         self.var_dep.set("Select Department")
+         self.var_course.set("Select Course")
+         self.var_year.set("Select Year")
+         self.var_semester.set("Select Semester")
          self.var_std_id.set("")
          self.var_std_name.set("")
+         self.var_div.set("Select Division")
+         self.var_roll.set("")
          self.var_gender.set("Male")
          self.var_dob.set("")
          self.var_email.set("")
@@ -520,14 +521,14 @@ class Student:
                messagebox.showerror("Error","All fields are required",parent=self.root)
            else:
                try:
-                    conn=mysql.connector.connect(host="localhost",username="root",password="Anshu@999",database="face_recogniger_system")
+                    conn=mysql.connector.connect(host="localhost",username="root",password="Anshu@999",database="face_recogniger")
                     my_cursor=conn.cursor()
                     my_cursor.execute("select * from student")
                     myresult=my_cursor.fetchall()
                     id=0
                     for x in myresult:
                         id+=1
-                    my_cursor.execute("update student set Dep=%s,Course=%s,year=%s,Semester=%s,Name=%s,Div=%s,Roll=%s,Gender=%s,DOB=%s,email=%s,phone=%s,address=%s,teacher=%s,SamplePhoto=%s where Student_id=%s",(
+                    my_cursor.execute("Dep=%s","Course=%s","Year=%s","Semester=%s","Student id=%s","Name=%s","Division=%s","Roll=%s","Gender=%s","DOB=%s","Email=%s","Phone=%s","Address=%s","Teacher=%s","PhotoSample=%s where Student_id=%s",(
                         
                                                                                                                                                                                self.var_dep.get(),
                                                                                                                                                                                self.var_course.get(),
@@ -543,7 +544,7 @@ class Student:
                                                                                                                                                                                self.var_address.get(),
                                                                                                                                                                                self.var_teacher.get(),
                                                                                                                                                                                self.var_radio1.get(),
-                                                                                                                                                                               self.var_std_id.get()==id+1
+                                                                                                                                                                               self.var_std_id.get()
                                                                                                                                                                           ))
                     conn.commit()
                     self.fetch_data()
@@ -557,7 +558,7 @@ class Student:
                         faces=face_classifier.detectMultiScale(gray,1.3,5)
                                    #     scaling factor=1.3
                                    # minimum neighbour=5
-                    for(x,y,w,h) in faces:
+                        for(x,y,w,h) in faces:
                               face_cropped=img[y:y+h,x:x+w]
                               return face_cropped
                     
@@ -565,16 +566,16 @@ class Student:
                     img_id=0
                     while True:
                         ret,my_frame=cap.read()
-                        if face_cropped(my_frame) is not none:
+                        if face_cropped(my_frame) is not None:
                               img_id+=1
                               face=cv2.resize(face_cropped(my_frame),(450,450))
                               face=cv2.cvtColor(face,cv2.COLOR_BGR2GRAY)
                               file_name_path="data/user."+str(id)+"."+str(img_id)+".jpg"
                               cv2.imwrite(file_name_path,face)
-                              cv2.putText(face,str(img_id),(50,50),cv2.FONT_HERSHEY_COMPLEX,2,(0,255,255,0),2)
+                              cv2.putText(face,str(img_id),(50,50),cv2.FONT_HERSHEY_COMPLEX,2,(0,255,0),2)
                               cv2.imshow("Cropped face",face)
 
-                        if cv2.waitKey(1)==13 or int(img_id)==100:
+                        if cv2.waitKey(1)==13 or int(img_id)==100: #sampleimage
                             break
                     cap.release()
                     cv2.destroyAllWindows()
@@ -586,28 +587,6 @@ class Student:
 
                        
          
-
-         
-
-                     
-          
-                       
-
-
-
-
-
-
-
-
-
-
-             
-
-
-
-
-
 
 if __name__ == "__main__":
      root=Tk()

@@ -182,7 +182,7 @@ class Face_Recognition_System:
           self.new_window=Toplevel(self.root)
           self.app=Attendence(self.new_window)
      def help_data(self):
-          self.new_window=Toplevel(self.root)
+          self.new_window=Toplevel(self.root) 
           self.app=Help(self.new_window)
      
      def developer_data(self):
@@ -199,22 +199,6 @@ class Face_Recognition_System:
 
 
               
-
-          
-
-
-
-
-
-         
-
-
-        
-
-
-          
-
-
 
 
 if __name__ == "__main__":
