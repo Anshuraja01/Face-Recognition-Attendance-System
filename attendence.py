@@ -182,7 +182,7 @@ class Attendence:
     def fetchData(selfself,rows):
         self.AttendenceReportTable.delete(*self.AttendenceReportTable.get_children())
         for i in rows:
-            self.AttendenceReportTable.insert("",END,values=i)
+           self.AttendenceReportTable.insert("",END,values=i)
 
 # import csv
     def importCsv(self):

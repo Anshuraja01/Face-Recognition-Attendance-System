@@ -86,7 +86,7 @@ class Face_Recognition_System:
           img6=img6.resize((220,220),Image.BILINEAR)
           self.photoimg6=ImageTk.PhotoImage(img6)
 
-          b1=Button(bg_img,image=self.photoimg6,cursor="hand2", command=self.face_data) 
+          b1=Button(bg_img,image=self.photoimg6,cursor="hand2", command=self.attendence_data) 
           
           b1.place(x=800,y=100,width=220,height=220)
 
@@ -117,7 +117,7 @@ class Face_Recognition_System:
          
           b1.place(x=200,y=380,width=220,height=220)
 
-          b1=Button(bg_img,text="Train Data",cursor="hand2",font =("heinrich",15,"italic"),bg="darkred",fg="white",command=self.train_data) 
+          b1=Button(bg_img,text="Train Data",cursor="hand2",command=self.train_data,font =("heinrich",15,"italic"),bg="darkred",fg="white") 
           
           b1.place(x=200,y=580,width=220,height=40)
 
@@ -126,12 +126,12 @@ class Face_Recognition_System:
           img9=img9.resize((220,220),Image.BILINEAR)
           self.photoimg9=ImageTk.PhotoImage(img9)
 
-          b1=Button(bg_img,image=self.photoimg9,cursor="hand2")
+          b1=Button(bg_img,image=self.photoimg9,cursor="hand2",command=self.open_img)
           #command=self.Photos_data
           b1.place(x=500,y=380,width=220,height=220)
           
 
-          b1=Button(bg_img,text="Photos",cursor="hand2",font =("heinrich",15,"italic"),bg="darkred",fg="white")
+          b1=Button(bg_img,text="Photos",cursor="hand2",command=self.open_img,font =("heinrich",15,"italic"),bg="darkred",fg="white")
           #command=self.Photos_data
           b1.place(x=500,y=580,width=220,height=40)
 
@@ -163,7 +163,7 @@ class Face_Recognition_System:
           
           b1.place(x=1100,y=580,width=220,height=40)
 
-          def open_img(self):
+     def open_img(self):
                os.startfile("data")
 
           # functions buttons
