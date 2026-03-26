@@ -6,7 +6,6 @@ import mysql.connector
 import cv2
 
 
-
 class Student:
      def __init__(self,root):
           self.root=root
@@ -40,7 +39,7 @@ class Student:
           f_lbl=Label(self.root,image=self.photoimg)
           f_lbl.place(x=0,y=0,width=500,height=150)
 
-         # second image  
+           # second image  
           img1=Image.open("C:/Users/happy/Desktop/Face recognition system/college images/facialrecognition.png")
           img1=img1.resize((500,150),Image.BILINEAR)
           self.photoimg1=ImageTk.PhotoImage(img1)
@@ -55,7 +54,7 @@ class Student:
           f_lbl=Label(self.root,image=self.photoimg2)
           f_lbl.place(x=1000,y=0,width=500,height=150)
 
-          #bg image
+          # bg image
           img3=Image.open("C:/Users/happy/Desktop/Face recognition system/college images/bg1.jpg")
           img3=img3.resize((1530,710),Image.BILINEAR)
           self.photoimg3=ImageTk.PhotoImage(img3)
@@ -69,7 +68,7 @@ class Student:
           main_frame=Frame(bg_img,bd=2,bg="white")
           main_frame.place(x=10,y=55,width=1500,height=630)
 
-          #left lable frame
+          # left lable frame
 
           Left_frame=LabelFrame(main_frame,bd=2,bg="white",relief=RIDGE,text="Student Details",font=("times new roman",12,"bold"))
           Left_frame.place(x=10,y=10,width=720,height=580)
@@ -81,12 +80,12 @@ class Student:
           f_lbl=Label(Left_frame,image=self.photoimg_left)
           f_lbl.place(x=5,y=0,width=720,height=130)
 
-          #current course
+          # current course
 
           current_course_frame=LabelFrame(Left_frame,bd=2,bg="white",relief=RIDGE,text="Current Course Information",font=("times new roman",12,"bold"))
           current_course_frame.place(x=5,y=135,width=720,height=150)
 
-          #department
+          # department
 
           dep_label=Label(current_course_frame,text="Department",font=("times new roman",13,"bold"),bg="white")
           dep_label.grid(row=0,column=0,padx=10,sticky=W)
@@ -354,14 +353,23 @@ class Student:
        # function decration
 
      def add_data(self):
-        if self.var_dep.get() == "select Department" or self.var_std_name.get() == "" or self.var_std_id.get() == "":
-         messagebox.showerror("Error", "All fields are required", parent=self.root)
-        else:
-         try:
-            conn = mysql.connector.connect(host="localhost", username="root", password="Anshu@999", database="face_recogniger")
+      if self.var_dep.get() == "Select Department" or self.var_std_name.get() == "" or self.var_std_id.get() == "":
+        messagebox.showerror("Error", "All fields are required", parent=self.root)
+      else:
+        try:
+            conn = mysql.connector.connect(
+                host="localhost",
+                username="root",
+                password="Anshu@999",
+                database="face_recogniger"
+            )
             my_cursor = conn.cursor()
-            sql = "Insert into student (Dep, Course, Year, Semester, Student_id, Name, Division, Roll, Gender, DOB, Email, Phone, Address, Teacher, PhotoSample) values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-            my_cursor.execute(sql, (
+
+            my_cursor.execute("""
+                INSERT INTO student 
+                (Dep, Course, Year, Semester, Student_id, Name, Division, Roll, Gender, DOB, Email, Phone, Address, Teacher, PhotoSample) 
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+            """, (
                 self.var_dep.get(),
                 self.var_course.get(),
                 self.var_year.get(),
@@ -378,13 +386,14 @@ class Student:
                 self.var_teacher.get(),
                 self.var_radio1.get()
             ))
+
             conn.commit()
             self.fetch_data()
             conn.close()
-            messagebox.showinfo("Success", "Student details has been added successfully", parent=self.root)
-         except Exception as es:
-            messagebox.showerror("Error", f"Due to :{str(es)}", parent=self.root)
+            messagebox.showinfo("Success", "Student details added successfully", parent=self.root)
 
+        except Exception as es:
+            messagebox.showerror("Error", f"Due to: {str(es)}", parent=self.root)
 
        # fetch data
 
@@ -528,24 +537,41 @@ class Student:
                     id=0
                     for x in myresult:
                         id+=1
-                    my_cursor.execute("Dep=%s","Course=%s","Year=%s","Semester=%s","Student id=%s","Name=%s","Division=%s","Roll=%s","Gender=%s","DOB=%s","Email=%s","Phone=%s","Address=%s","Teacher=%s","PhotoSample=%s where Student_id=%s",(
-                        
-                                                                                                                                                                               self.var_dep.get(),
-                                                                                                                                                                               self.var_course.get(),
-                                                                                                                                                                               self.var_year.get(),
-                                                                                                                                                                               self.var_semester.get(),
-                                                                                                                                                                               self.var_std_name.get(),
-                                                                                                                                                                               self.var_div.get(),
-                                                                                                                                                                               self.var_roll.get(),
-                                                                                                                                                                               self.var_gender.get(),
-                                                                                                                                                                               self.var_dob.get(),
-                                                                                                                                                                               self.var_email.get(),
-                                                                                                                                                                               self.var_phone.get(),
-                                                                                                                                                                               self.var_address.get(),
-                                                                                                                                                                               self.var_teacher.get(),
-                                                                                                                                                                               self.var_radio1.get(),
-                                                                                                                                                                               self.var_std_id.get()
-                                                                                                                                                                          ))
+                    my_cursor.execute("""
+    UPDATE student SET 
+        Dep=%s,
+        Course=%s,
+        Year=%s,
+        Semester=%s,
+        Name=%s,
+        Division=%s,
+        Roll=%s,
+        Gender=%s,
+        DOB=%s,
+        Email=%s,
+        Phone=%s,
+        Address=%s,
+        Teacher=%s,
+        PhotoSample=%s
+    WHERE Student_id=%s
+""",(
+        self.var_dep.get(),
+        self.var_course.get(),
+        self.var_year.get(),
+        self.var_semester.get(),
+        self.var_std_name.get(),
+        self.var_div.get(),
+        self.var_roll.get(),
+        self.var_gender.get(),
+        self.var_dob.get(),
+        self.var_email.get(),
+        self.var_phone.get(),
+        self.var_address.get(),
+        self.var_teacher.get(),
+        self.var_radio1.get(),
+        self.var_std_id.get()
+))
+
                     conn.commit()
                     self.fetch_data()
                     self.reset_data()
