@@ -62,7 +62,8 @@ python student.py
 
 ## 📷 Output / Screenshots
 ![GUI](images/home-screen.png.png)
-![Attendance](student-management.png.png) 
+
+
 ---
 
 ## 📌 Note
